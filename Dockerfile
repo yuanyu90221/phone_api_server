@@ -9,6 +9,8 @@ COPY  package.json app
 WORKDIR  app/
 RUN npm install 
 RUN npm run buildProd
+COPY server/api.yml ./build/
+COPY server/static ./build/
 ARG NODE_ENV
 ARG APP_NAME
 ARG PORT
