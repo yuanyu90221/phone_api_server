@@ -34,3 +34,7 @@ npm i
 ```script===
 npm run test
 ```
+3 update the document with typedoc
+```script
+npm run generate_doc
+```

@@ -1,0 +1,11 @@
+{
+    "mode": "file",
+    "out": "docs",
+    "exclude": [
+        "node_modules",
+        "__tests__",
+        "*.yml",
+        "*.md"
+    ],
+    "name": "phone-api-server"
+}

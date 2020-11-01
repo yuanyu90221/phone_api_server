@@ -12,7 +12,8 @@
     "watch_ts": "tsc -w",
     "dev_hot_reload": "ts-node-dev --respawn  --transpile-only ./server/server.ts",
     "buildProd": "npm run clear && npm run tsc &&  npm run clearTest ",
-    "start": "npm run buildProd &&cp server/api.yml  build/server/ && cp -R server/static build/server/static && node ./build/server/server.js"
+    "start": "npm run buildProd &&cp server/api.yml  build/server/ && cp -R server/static build/server/static && node ./build/server/server.js",
+    "generate_doc": "typedoc"
   },
   "pre-commit": [
     "test"
@@ -53,6 +54,7 @@
     "koa-router": "^9.4.0",
     "libphonenumber-js": "^1.8.5",
     "swagger2": "^2.0.0",
-    "swagger2-koa": "^2.0.0"
+    "swagger2-koa": "^2.0.0",
+    "typedoc": "^0.19.2"
   }
 }
