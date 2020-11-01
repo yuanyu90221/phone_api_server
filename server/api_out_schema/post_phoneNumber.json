@@ -1,0 +1,13 @@
+{
+    "type": "object",
+    "propteries": {
+        "phone": {
+            "description": "in response body",
+            "type": "string",
+            "minLength": 1
+        }
+    },
+    "required": [
+        "phone"
+    ]
+}
