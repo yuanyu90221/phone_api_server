@@ -38,3 +38,7 @@ npm run test
 ```script
 npm run generate_doc
 ```
+
+## doc reference
+
+[phone_api_server doc reference](https://yuanyu90221.github.io/phone_api_server/index.html)
