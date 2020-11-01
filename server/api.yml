@@ -1,0 +1,67 @@
+swagger: "2.0"
+info: 
+    title: "phone-api-server"
+    description: >
+      This is document for phone api server that transfer phone string to phone national format.
+    version: "1.0.0"
+host: 'localhost:9999'
+schemes:
+  - "http"
+paths:   
+    /phone:
+        post:
+              consumes:
+                  - "application/json"
+              produces:
+                  - "application/json"
+              parameters:
+                  - in: "body"
+                    name: "body"
+                    description: "phone"
+                    required: true
+                    schema:
+                        $ref: "#/definitions/PhoneRequest"
+              responses:
+                  200:
+                      description: "successful operation"
+                      schema:
+                          $ref: "#/definitions/PhoneResponse"
+                  400:
+                      $ref: '#/responses/400'
+                  500:
+                      $ref: '#/responses/500'
+responses:
+    400:
+        description: Bad Request
+        schema:
+            $ref: "#/definitions/Error"
+    500:
+        description: Internal Server Error
+        schema:
+            $ref: "#/definitions/Error"
+
+definitions:
+    PhoneRequest:
+      type: "object"
+      required:
+          - phone
+      properties:
+          phone:
+              type: "string"
+              example: "+12133734253"
+
+    PhoneResponse:
+        type: "object"
+        properties:
+            phone:
+                type: "string"
+                example: "(213) 373-4253"
+    Error:
+        type: "object"
+        properties:
+            message:
+                type: "string"
+            errCode:
+                type: "string"
+            status:
+                type: "number"
