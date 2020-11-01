@@ -1,0 +1,16 @@
+version: '3'
+services:
+  phone_api_server:
+    build: .
+    container_name: 'phone_api_server'
+    restart: always
+    ports:
+      - ${PORT}:${PORT}
+    networks:
+      - backend
+    environment:
+      - NODE_ENV=${NODE_ENV}
+      - APP_NAME=${APP_NAME}
+      - PORT=${PORT}
+networks:
+  backend:

@@ -11,8 +11,8 @@
     "clear": "rm -rf build",
     "watch_ts": "tsc -w",
     "dev_hot_reload": "ts-node-dev --respawn  --transpile-only ./server/server.ts",
-    "buildProd": "npm run clear && npm run tsc &&  npm run clearTest",
-    "start": "npm run clear && npm run tsc && node ./build/server.js"
+    "buildProd": "npm run clear && npm run tsc &&  npm run clearTest && cp -R server/static build/static",
+    "start": "npm run buildProd && node ./build/server.js"
   },
   "pre-commit": [
     "test"
