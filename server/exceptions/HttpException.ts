@@ -1,4 +1,5 @@
 import { ErrorCode } from "../enums/errorCode";
+import { ERRORS } from "../enums/errorName";
 import { httpExceptionInput } from "../interfaces/httpException.interface";
 import {Logger} from "../lib/logger";
 export class HttpException extends Error {
@@ -8,7 +9,7 @@ export class HttpException extends Error {
     message: string;
     constructor (input: httpExceptionInput) {
         super(input.message);
-        this.name = 'HttpException';
+        this.name = ERRORS.HttpException;
         this.status = input.status;
         this.message = input.message;
         this.errCode = input.errCode;

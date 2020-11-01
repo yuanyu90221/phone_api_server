@@ -1,11 +1,14 @@
 import * as koa from 'koa';
 import {ErrorCode} from '../enums/errorCode';
+import { ERRORS } from '../enums/errorName';
 import { HttpException } from '../exceptions/HttpException';
+import { logger } from '../lib/logger';
 import { isPostPhoneValid, isPostPhoneValidOut } from '../services';
 export const phoneInputChecker = async(ctx: koa.Context, next: () => Promise<any>) => {
     try {
         let {phone} = ctx.request.body;
         const validResult = isPostPhoneValid({phone});
+        logger.info(validResult);
         if (validResult.isValid) {
             ctx.state.phone = phone;
         } else {
@@ -16,7 +19,7 @@ export const phoneInputChecker = async(ctx: koa.Context, next: () => Promise<any
         await next(); 
     } catch (err) {
         const message = err.message? err.message: err.toString();
-        if (err.name !== 'HttpExcepiton') {
+        if (err.name !== ERRORS.HttpException) {
          err = new HttpException({status:500, errCode: ErrorCode.Unknown, message});   
         }
         throw err;
@@ -30,13 +33,13 @@ export const phoneOutputChecker = async(ctx: koa.Context) => {
         if (!validResult.isValid) {
            const err = validResult.error;
            const message = err?.message;
-           throw new HttpException({status:500, client_message: `[${ctx.request.method}][${ctx.request.path}][phoneOutputChecker]: output api error, please contact us.`,message: message? message: '', errCode: ErrorCode.PhoneOutputError});
+           throw new HttpException({status:400, client_message: `[${ctx.request.method}][${ctx.request.path}][phoneOutputChecker]: output api error, please contact us.`,message: message? message: '', errCode: ErrorCode.PhoneOutputError});
         }
         ctx.status = 200;
         ctx.body = { phone: phoneFormat};
     } catch (err) {
         const message = err.message? err.message: err.toString();
-        if (err.name !== 'HttpExcepiton') {
+        if (err.name !== ERRORS.HttpException) {
          err = new HttpException({status:500, errCode: ErrorCode.Unknown, message});   
         }
         throw err;
